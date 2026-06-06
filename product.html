@@ -1,0 +1,683 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lanka Luxe | Product Details</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Plus+Jakarta+Sans:wght@200;300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Tailwind CSS CDN v3 -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: {
+                            900: '#0F3A2E',
+                            950: '#0D0D0C',
+                        },
+                        accent: {
+                            400: '#C5A880',
+                            500: '#9E805A',
+                        },
+                        stone: {
+                            50: '#FAF7F2',
+                            100: '#F5EFE6',
+                            200: '#EAE1D4',
+                            450: '#8e7965',
+                            850: '#0D0D0C',
+                        }
+                    },
+                    fontFamily: {
+                        heading: ['Playfair Display', 'serif'],
+                        body: ['Plus Jakarta Sans', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .glass-nav {
+            background: rgba(250, 247, 242, 0.85);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+        }
+        body {
+            background-color: #FAF7F2;
+            color: #0D0D0C;
+        }
+        .zoom-frame {
+            overflow: hidden;
+            position: relative;
+            cursor: zoom-in;
+        }
+        .zoom-frame img {
+            transition: transform 0.1s ease-out;
+            transform-origin: center center;
+        }
+    </style>
+</head>
+<body class="font-body selection:bg-stone-200 selection:text-stone-850">
+
+    <!-- 1. Header Navigation -->
+    <header class="sticky top-0 z-40 w-full border-b border-stone-200/50 glass-nav">
+        <div class="max-w-7xl mx-auto px-6 lg:px-10">
+            <div class="flex items-center justify-between h-24">
+                <!-- Mobile Menu Button -->
+                <div class="flex items-center md:hidden">
+                    <button id="menu-toggle" class="text-stone-850 focus:outline-none p-2" aria-label="Toggle Menu">
+                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 6h16M4 12h16M4 18h16" />
+                        </svg>
+                    </button>
+                </div>
+
+                <!-- Logo -->
+                <div class="flex-1 md:flex-none text-center md:text-left">
+                    <a href="index.html" class="inline-block">
+                        <span class="font-body text-lg font-bold tracking-[0.35em] text-primary-950 uppercase">LANKA LUXE</span>
+                    </a>
+                </div>
+
+                <!-- Navigation Links -->
+                <nav class="hidden md:flex space-x-12">
+                    <a href="index.html" class="text-xs font-semibold tracking-[0.25em] uppercase text-stone-400 hover:text-primary-950 transition-colors pb-1 border-b border-transparent hover:border-accent-400">Home</a>
+                    <a href="shop.html" class="text-xs font-semibold tracking-[0.25em] uppercase text-stone-400 hover:text-primary-950 transition-colors pb-1 border-b-2 border-transparent hover:border-accent-400">Shop</a>
+                    <a href="wishlist.html" class="text-xs font-semibold tracking-[0.25em] uppercase text-stone-400 hover:text-primary-950 transition-colors pb-1 border-b border-transparent hover:border-accent-400">Wishlist</a>
+                </nav>
+
+                <!-- Action Links -->
+                <div class="flex items-center space-x-6">
+                    <a href="wishlist.html" class="relative text-stone-850 hover:text-accent-500 transition-colors p-1" aria-label="My Wishlist">
+                        <svg class="h-5.5 w-5.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+                        </svg>
+                        <span class="wishlist-count-badge hidden absolute top-0 right-0 transform translate-x-1/2 -translate-y-1/2 bg-accent-400 text-stone-850 text-[9px] font-bold rounded-full h-4 w-4 flex items-center justify-center border border-stone-50">0</span>
+                    </a>
+
+                    <button class="open-cart-trigger relative text-stone-850 hover:text-accent-500 transition-colors p-1 focus:outline-none" aria-label="Shopping Drawer">
+                        <svg class="h-5.5 w-5.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
+                        </svg>
+                        <span class="cart-count-badge hidden absolute top-0 right-0 transform translate-x-1/2 -translate-y-1/2 bg-stone-900 text-white text-[9px] font-bold rounded-full h-4 w-4 flex items-center justify-center border border-stone-50">0</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Menu Panel -->
+        <div id="mobile-menu" class="hidden md:hidden border-t border-stone-200/50 bg-stone-50 px-6 py-6 space-y-3 shadow-xl">
+            <a href="index.html" class="block text-xs font-bold uppercase tracking-[0.2em] text-stone-500 py-2">Home</a>
+            <a href="shop.html" class="block text-xs font-bold uppercase tracking-[0.2em] text-stone-500 py-2">Shop</a>
+            <a href="wishlist.html" class="block text-xs font-bold uppercase tracking-[0.2em] text-stone-500 py-2">Wishlist</a>
+        </div>
+    </header>
+
+    <!-- 2. Breadcrumb Navigation -->
+    <div class="max-w-7xl mx-auto px-6 lg:px-10 py-8">
+        <nav class="flex text-[10px] font-bold uppercase tracking-[0.2em] text-stone-400" aria-label="Breadcrumb">
+            <a href="index.html" class="hover:text-primary-950 transition-colors">Home</a>
+            <span class="mx-3">/</span>
+            <a href="shop.html" class="hover:text-primary-955 transition-colors">Shop</a>
+            <span class="mx-3">/</span>
+            <span class="text-stone-450" id="breadcrumb-category">Category</span>
+            <span class="mx-3">/</span>
+            <span class="text-stone-850 font-semibold" id="breadcrumb-title">Product Name</span>
+        </nav>
+    </div>
+
+    <!-- 3. Main Product Details Container -->
+    <main class="max-w-7xl mx-auto px-6 lg:px-10 pb-32">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-16 items-start">
+            
+            <!-- Left Column: Product Gallery -->
+            <div class="lg:col-span-7 space-y-6">
+                <!-- Large image zoom frame -->
+                <div class="zoom-frame bg-stone-50 border border-stone-200/60 rounded-none aspect-[4/5] overflow-hidden relative shadow-sm" id="zoom-container">
+                    <span class="absolute top-4 left-4 z-10 bg-accent-400 text-stone-950 text-[9px] font-bold tracking-[0.2em] px-2.5 py-1.5 uppercase rounded-none shadow-md" id="product-discount-badge"></span>
+                    <img src="" alt="" class="w-full h-full object-cover" id="product-main-img">
+                </div>
+                
+                <!-- Gallery Thumbnails -->
+                <div class="grid grid-cols-4 gap-4" id="gallery-thumbnails">
+                    <!-- Populated dynamically via JS -->
+                </div>
+            </div>
+
+            <!-- Right Column: Product details and variant selectors -->
+            <div class="lg:col-span-5 space-y-8 lg:sticky lg:top-28">
+                <!-- Headings -->
+                <div>
+                    <span class="text-[10px] uppercase font-bold tracking-[0.25em] text-accent-500 block mb-2" id="product-category">Category</span>
+                    <h1 class="font-heading text-4xl font-light text-stone-850 tracking-wide leading-tight mb-4" id="product-title">Product Loading...</h1>
+                    
+                    <!-- Rating Star sparklers -->
+                    <div class="flex items-center gap-1.5">
+                        <div class="flex items-center text-accent-400" id="stars-display">
+                            <!-- SVG stars inject -->
+                        </div>
+                        <span class="text-xs font-bold text-stone-850 ml-1" id="rating-val">4.8</span>
+                        <span class="text-[10px] text-stone-400 uppercase tracking-widest font-semibold ml-1.5" id="reviews-count-val">(0 reviews)</span>
+                    </div>
+                </div>
+
+                <!-- Price Block -->
+                <div class="flex items-baseline gap-4 border-y border-stone-200/60 py-6 font-mono">
+                    <span class="text-2xl font-semibold text-stone-850" id="product-price">Rs. 0</span>
+                    <span class="text-sm text-stone-400 line-through hidden" id="product-original-price">Rs. 0</span>
+                </div>
+
+                <!-- Product short descriptive copy -->
+                <p class="text-xs text-stone-500 leading-relaxed uppercase tracking-[0.05em]" id="product-description">
+                    Description loader...
+                </p>
+
+                <!-- Variant swatches selection -->
+                <div class="space-y-6 pt-2">
+                    <!-- Colors swatches -->
+                    <div>
+                        <h3 class="text-[10px] font-bold uppercase tracking-[0.2em] text-stone-450 mb-3.5">Color: <span class="text-stone-800" id="selected-color-name">Loading...</span></h3>
+                        <div class="flex flex-wrap gap-3" id="color-swatches-container">
+                            <!-- Populated dynamically -->
+                        </div>
+                    </div>
+
+                    <!-- Sizes swatches -->
+                    <div>
+                        <h3 class="text-[10px] font-bold uppercase tracking-[0.2em] text-stone-450 mb-3.5">Size: <span class="text-stone-800" id="selected-size-name">Loading...</span></h3>
+                        <div class="flex flex-wrap gap-2.5" id="size-selectors-container">
+                            <!-- Populated dynamically -->
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Quantity adjustment and quick purchase actions -->
+                <div class="space-y-5 pt-4">
+                    <div class="flex items-center gap-4">
+                        <!-- Qty adjuster -->
+                        <div class="flex items-center border border-stone-300 rounded-none bg-white">
+                            <button onclick="changeQty(-1)" class="px-4 py-3 text-stone-600 hover:bg-stone-100 transition-colors font-bold text-xs focus:outline-none">-</button>
+                            <span class="px-5 text-xs font-bold text-stone-850 font-mono" id="qty-display">1</span>
+                            <button onclick="changeQty(1)" class="px-4 py-3 text-stone-600 hover:bg-stone-100 transition-colors font-bold text-xs focus:outline-none">+</button>
+                        </div>
+
+                        <!-- Add Wishlist detail button -->
+                        <button id="detail-wishlist-btn" class="border border-stone-300 hover:bg-stone-50 p-3.5 rounded-none transition-all focus:outline-none" aria-label="Save to Wishlist">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5.5 w-5.5 text-stone-700 transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor" id="detail-wish-icon">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+                            </svg>
+                        </button>
+                    </div>
+
+                    <div class="flex flex-col sm:flex-row gap-3">
+                        <button onclick="handleAddToCart()" class="flex-1 bg-stone-900 hover:bg-stone-850 text-white font-semibold text-xs uppercase tracking-[0.2em] py-4.5 px-6 rounded-none transition-colors shadow">
+                            Add to Bag
+                        </button>
+                        <button onclick="handleBuyNow()" class="flex-1 border border-stone-900 hover:bg-stone-100 text-stone-900 font-semibold text-xs uppercase tracking-[0.2em] py-4.5 px-6 rounded-none transition-colors">
+                            Buy Now
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Product Specifications Collapsible Accordions -->
+                <div class="border-t border-stone-200 mt-10 divide-y divide-stone-200 text-xs">
+                    <details class="group py-4.5" open>
+                        <summary class="flex justify-between items-center font-bold uppercase tracking-[0.15em] text-stone-800 cursor-pointer list-none">
+                            Specifications & Fit
+                            <span class="transition group-open:rotate-180">
+                                <svg class="h-4 w-4 text-stone-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" /></svg>
+                            </span>
+                        </summary>
+                        <div class="text-stone-500 mt-4 space-y-3 leading-relaxed uppercase tracking-[0.05em] text-[10px]">
+                            <p>• Weave Details: Authentic Sri Lankan Hand-loom and Zari Weaving techniques</p>
+                            <p>• Material: Organic eco-friendly cotton-silk blend and biological linen</p>
+                            <p>• Fit Guidelines: Regular editorial model fit. Tailored to comfort</p>
+                            <p>• Wash Instruction: Dry clean only or delicate cold handwash using biological detergents</p>
+                        </div>
+                    </details>
+                    
+                    <details class="group py-4.5">
+                        <summary class="flex justify-between items-center font-bold uppercase tracking-[0.15em] text-stone-800 cursor-pointer list-none">
+                            Shipping & Exchange
+                            <span class="transition group-open:rotate-180">
+                                <svg class="h-4 w-4 text-stone-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" /></svg>
+                            </span>
+                        </summary>
+                        <div class="text-stone-500 mt-4 leading-relaxed uppercase tracking-[0.05em] text-[10px]">
+                            <p>Premium island-wide delivery in 3-5 working days. Returns or size exchanges are valid inside 7 days from delivery date via tracked store drop-offs or courier postages.</p>
+                        </div>
+                    </details>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- 4. Dynamic Customer Reviews Section -->
+        <section class="border-t border-stone-200/60 mt-24 pt-16">
+            <h2 class="font-heading text-3xl font-light text-stone-850 mb-12">Client Feedback</h2>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-16">
+                <!-- Reviews list -->
+                <div class="lg:col-span-7 space-y-8" id="reviews-list">
+                    <!-- Populated dynamically -->
+                </div>
+
+                <!-- Add Review Form -->
+                <div class="lg:col-span-5 bg-white border border-stone-200/60 rounded-none p-8 shadow-sm">
+                    <h3 class="font-heading text-xl font-light text-stone-850 mb-6">Write a Review</h3>
+                    <form id="review-form" class="space-y-5">
+                        <div>
+                            <label class="block text-[10px] font-bold uppercase tracking-wider text-stone-400 mb-1.5" for="rev-name">Full Name</label>
+                            <input type="text" id="rev-name" required class="w-full px-4 py-3 border border-stone-300 focus:outline-none focus:border-stone-800 text-xs text-stone-800 bg-stone-50 rounded-none">
+                        </div>
+                        
+                        <div>
+                            <label class="block text-[10px] font-bold uppercase tracking-wider text-stone-400 mb-1.5">Rating Selection</label>
+                            <div class="flex items-center gap-1.5 text-stone-300" id="star-selector">
+                                <button type="button" class="star-select-btn hover:text-accent-400 transition-colors p-1" data-val="1">
+                                    <svg class="h-5 w-5 fill-current" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                                </button>
+                                <button type="button" class="star-select-btn hover:text-accent-400 transition-colors p-1" data-val="2">
+                                    <svg class="h-5 w-5 fill-current" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                                </button>
+                                <button type="button" class="star-select-btn hover:text-accent-400 transition-colors p-1" data-val="3">
+                                    <svg class="h-5 w-5 fill-current" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                                </button>
+                                <button type="button" class="star-select-btn hover:text-accent-400 transition-colors p-1" data-val="4">
+                                    <svg class="h-5 w-5 fill-current" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                                </button>
+                                <button type="button" class="star-select-btn hover:text-accent-400 transition-colors p-1" data-val="5">
+                                    <svg class="h-5 w-5 fill-current" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                                </button>
+                            </div>
+                        </div>
+
+                        <div>
+                            <label class="block text-[10px] font-bold uppercase tracking-wider text-stone-400 mb-1.5" for="rev-comment">Review Description</label>
+                            <textarea id="rev-comment" required rows="4" class="w-full px-4 py-3 border border-stone-300 focus:outline-none focus:border-stone-800 text-xs text-stone-850 bg-stone-50 rounded-none resize-none"></textarea>
+                        </div>
+                        
+                        <button type="submit" class="w-full bg-stone-900 hover:bg-stone-850 text-white font-semibold text-xs uppercase tracking-[0.2em] py-3.5 rounded-none transition-colors">
+                            Submit Review
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+        <!-- 5. Related Products Section -->
+        <section class="border-t border-stone-200/60 mt-24 pt-16">
+            <h2 class="font-heading text-2xl font-light text-stone-850 mb-12 text-center">You May Also Like</h2>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10" id="related-products-grid">
+                <!-- Related populated dynamically -->
+            </div>
+        </section>
+    </main>
+
+    <!-- 6. Footer -->
+    <footer class="bg-stone-950 text-stone-500 border-t border-stone-900 pt-16 pb-12 text-xs">
+        <div class="max-w-7xl mx-auto px-6 lg:px-10 text-center">
+            <p class="text-[10px] font-semibold uppercase tracking-[0.25em] text-stone-600">&copy; 2026 Lanka Luxe. Weaved with pride in Sri Lanka.</p>
+        </div>
+    </footer>
+
+    <!-- Shared Core Engine JS -->
+    <script src="script.js"></script>
+    <script>
+        let currentProduct = null;
+        let selectedColor = '';
+        let selectedSize = '';
+        let currentQty = 1;
+        let selectedStarValue = 5;
+
+        const reviewsDatabase = [
+            { id: 1, name: "Priyantha S.", rating: 5, date: "June 2, 2026", comment: "Absolutely stunning weave quality. The color is even more vibrant in person. Fits beautifully." },
+            { id: 2, name: "Dilani W.", rating: 5, date: "May 28, 2026", comment: "Comfortable and very breathable. Wore it to an evening outdoor resort event, received so many compliments." },
+            { id: 3, name: "Mark A.", rating: 4, date: "May 15, 2026", comment: "Excellent customer service and prompt delivery. Material is great, though standard sizing runs slightly relaxed." }
+        ];
+
+        document.addEventListener('DOMContentLoaded', () => {
+            loadProductDetails();
+            setupZoomEffect();
+            setupStarSelection();
+            setupReviewSubmit();
+
+            window.addEventListener('wishlistUpdated', () => {
+                if (currentProduct) {
+                    updateWishlistHeartState();
+                }
+            });
+        });
+
+        function loadProductDetails() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const productId = parseInt(urlParams.get('id')) || 1;
+
+            currentProduct = products.find(p => p.id === productId) || products[0];
+
+            document.getElementById('breadcrumb-category').textContent = currentProduct.category;
+            document.getElementById('breadcrumb-title').textContent = currentProduct.title;
+
+            document.getElementById('product-category').textContent = currentProduct.category;
+            document.getElementById('product-title').textContent = currentProduct.title;
+            document.getElementById('rating-val').textContent = currentProduct.rating;
+            document.getElementById('reviews-count-val').textContent = `(${currentProduct.reviewsCount} reviews)`;
+            
+            let starsHTML = '';
+            const floorRating = Math.floor(currentProduct.rating);
+            for (let i = 1; i <= 5; i++) {
+                if (i <= floorRating) {
+                    starsHTML += `<svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>`;
+                } else {
+                    starsHTML += `<svg class="w-3.5 h-3.5 text-stone-200 fill-current" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>`;
+                }
+            }
+            document.getElementById('stars-display').innerHTML = starsHTML;
+
+            document.getElementById('product-price').textContent = `Rs. ${currentProduct.price.toLocaleString()}`;
+            const origPriceDisplay = document.getElementById('product-original-price');
+            const discountBadge = document.getElementById('product-discount-badge');
+            
+            if (currentProduct.originalPrice > currentProduct.price) {
+                origPriceDisplay.textContent = `Rs. ${currentProduct.originalPrice.toLocaleString()}`;
+                origPriceDisplay.classList.remove('hidden');
+                
+                const discPct = Math.round((1 - currentProduct.price / currentProduct.originalPrice) * 100);
+                discountBadge.textContent = `-${discPct}%`;
+                discountBadge.classList.remove('hidden');
+            } else {
+                origPriceDisplay.classList.add('hidden');
+                discountBadge.classList.add('hidden');
+            }
+
+            document.getElementById('product-description').textContent = currentProduct.description;
+
+            document.getElementById('product-main-img').src = currentProduct.images[0];
+            document.getElementById('product-main-img').alt = currentProduct.title;
+            
+            let thumbsHTML = '';
+            currentProduct.images.forEach((img, idx) => {
+                thumbsHTML += `
+                    <button onclick="setMainImage('${img}', this)" class="aspect-square rounded-none border-2 ${idx === 0 ? 'border-stone-800' : 'border-stone-200'} overflow-hidden bg-stone-50 focus:outline-none">
+                        <img src="${img}" alt="${currentProduct.title} view ${idx+1}" class="w-full h-full object-cover">
+                    </button>
+                `;
+            });
+            document.getElementById('gallery-thumbnails').innerHTML = thumbsHTML;
+
+            selectedColor = currentProduct.colors[0];
+            document.getElementById('selected-color-name').textContent = selectedColor;
+            let colorsHTML = '';
+            currentProduct.colors.forEach((col, idx) => {
+                let hexBg = '#888';
+                if (col === 'Royal Crimson') hexBg = '#9b1c1c';
+                else if (col === 'Deep Emerald') hexBg = '#065f46';
+                else if (col === 'Golden Mustard') hexBg = '#d97706';
+                else if (col === 'Off-White') hexBg = '#f3f4f6';
+                else if (col === 'Ocean Blue') hexBg = '#1d4ed8';
+                else if (col === 'Sand Beige') hexBg = '#d1fae5';
+                else if (col === 'Olive Green') hexBg = '#3f6212';
+                else if (col === 'Blush Pink') hexBg = '#fbcfe8';
+                else if (col === 'Soft Alabaster') hexBg = '#fffaf0';
+                else if (col === 'Indigo Blue') hexBg = '#312e81';
+                else if (col === 'Sunset Orange') hexBg = '#ea580c';
+                else if (col === 'Royal Blue') hexBg = '#1e3a8a';
+                else if (col === 'Ivory White') hexBg = '#fafaf9';
+                else if (col === 'Maroon Gold') hexBg = '#7f1d1d';
+                else if (col === 'Teal Check') hexBg = '#115e59';
+                else if (col === 'Ruby Red Check') hexBg = '#be123c';
+                else if (col === 'Charcoal Check') hexBg = '#374151';
+
+                colorsHTML += `
+                    <button onclick="selectColor('${col}', this)" class="w-8 h-8 rounded-full border ${idx === 0 ? 'border-stone-800 ring-2 ring-stone-200' : 'border-stone-300'} p-0.5 focus:outline-none" title="${col}">
+                        <span class="block w-full h-full rounded-full" style="background-color: ${hexBg}"></span>
+                    </button>
+                `;
+            });
+            document.getElementById('color-swatches-container').innerHTML = colorsHTML;
+
+            selectedSize = currentProduct.sizes[0];
+            document.getElementById('selected-size-name').textContent = selectedSize;
+            let sizesHTML = '';
+            currentProduct.sizes.forEach((sz, idx) => {
+                sizesHTML += `
+                    <button onclick="selectSize('${sz}', this)" class="border-2 ${idx === 0 ? 'border-stone-850 text-stone-850 bg-stone-100 font-bold' : 'border-stone-300 text-stone-500 font-semibold'} rounded-none px-4 py-2 text-[10px] uppercase tracking-widest focus:outline-none transition-all">
+                        ${sz}
+                    </button>
+                `;
+            });
+            document.getElementById('size-selectors-container').innerHTML = sizesHTML;
+
+            const wishlistBtn = document.getElementById('detail-wishlist-btn');
+            wishlistBtn.addEventListener('click', () => {
+                toggleWishlist(currentProduct.id);
+            });
+            updateWishlistHeartState();
+            renderReviews();
+            renderRelatedProducts();
+        }
+
+        function setMainImage(imgSrc, btn) {
+            document.getElementById('product-main-img').src = imgSrc;
+            const thumbs = document.querySelectorAll('#gallery-thumbnails button');
+            thumbs.forEach(t => t.classList.remove('border-stone-800'));
+            thumbs.forEach(t => t.classList.add('border-stone-200'));
+            btn.classList.remove('border-stone-200');
+            btn.classList.add('border-stone-800');
+        }
+
+        // Color selection sync
+        function selectColor(colorName, btn) {
+            selectedColor = colorName;
+            document.getElementById('selected-color-name').textContent = colorName;
+            const buttons = document.querySelectorAll('#color-swatches-container button');
+            buttons.forEach(b => b.classList.remove('border-stone-800', 'ring-2', 'ring-stone-200'));
+            buttons.forEach(b => b.classList.add('border-stone-300'));
+            btn.classList.remove('border-stone-300');
+            btn.classList.add('border-stone-800', 'ring-2', 'ring-stone-200');
+        }
+
+        // Size selection sync
+        function selectSize(sizeName, btn) {
+            selectedSize = sizeName;
+            document.getElementById('selected-size-name').textContent = sizeName;
+            const buttons = document.querySelectorAll('#size-selectors-container button');
+            buttons.forEach(b => {
+                b.className = 'border-2 border-stone-300 text-stone-500 font-semibold rounded-none px-4 py-2 text-[10px] uppercase tracking-widest focus:outline-none transition-all';
+            });
+            btn.className = 'border-2 border-stone-850 text-stone-850 bg-stone-100 font-bold rounded-none px-4 py-2 text-[10px] uppercase tracking-widest focus:outline-none transition-all';
+        }
+
+        function changeQty(delta) {
+            let nextQty = currentQty + delta;
+            if (nextQty >= 1 && nextQty <= 10) {
+                currentQty = nextQty;
+                document.getElementById('qty-display').textContent = currentQty;
+            }
+        }
+
+        function updateWishlistHeartState() {
+            const isLiked = wishlist.includes(currentProduct.id);
+            const icon = document.getElementById('detail-wish-icon');
+            if (isLiked) {
+                icon.classList.add('text-red-500', 'fill-current');
+                icon.classList.remove('text-stone-700');
+            } else {
+                icon.classList.remove('text-red-500', 'fill-current');
+                icon.classList.add('text-stone-700');
+            }
+        }
+
+        function handleAddToCart() {
+            if (currentProduct) {
+                addToCart(currentProduct.id, currentQty, selectedColor, selectedSize);
+                currentQty = 1;
+                document.getElementById('qty-display').textContent = 1;
+            }
+        }
+
+        function handleBuyNow() {
+            if (currentProduct) {
+                addToCart(currentProduct.id, currentQty, selectedColor, selectedSize);
+                window.location.href = 'checkout.html';
+            }
+        }
+
+        function setupZoomEffect() {
+            const frame = document.getElementById('zoom-container');
+            const img = document.getElementById('product-main-img');
+            if (!frame || !img) return;
+
+            frame.addEventListener('mousemove', (e) => {
+                const rect = frame.getBoundingClientRect();
+                const x = ((e.clientX - rect.left) / rect.width) * 100;
+                const y = ((e.clientY - rect.top) / rect.height) * 100;
+
+                img.style.transformOrigin = `${x}% ${y}%`;
+                img.style.transform = 'scale(2)';
+            });
+
+            frame.addEventListener('mouseleave', () => {
+                img.style.transform = 'scale(1)';
+                img.style.transformOrigin = 'center center';
+            });
+        }
+
+        function setupStarSelection() {
+            const stars = document.querySelectorAll('.star-select-btn');
+            stars.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const val = parseInt(btn.dataset.val);
+                    selectedStarValue = val;
+
+                    stars.forEach((s, idx) => {
+                        if (idx < val) {
+                            s.classList.add('text-accent-400');
+                            s.classList.remove('text-stone-300');
+                        } else {
+                            s.classList.remove('text-accent-400');
+                            s.classList.add('text-stone-300');
+                        }
+                    });
+                });
+            });
+        }
+
+        function renderReviews() {
+            const container = document.getElementById('reviews-list');
+            if (!container) return;
+
+            if (reviewsDatabase.length === 0) {
+                container.innerHTML = `<p class="text-xs text-stone-400 uppercase tracking-widest">No reviews yet. Be the first to review.</p>`;
+                return;
+            }
+
+            let html = '';
+            reviewsDatabase.forEach(rev => {
+                let ratingStars = '';
+                for (let i = 1; i <= 5; i++) {
+                    if (i <= rev.rating) {
+                        ratingStars += `<svg class="w-3.5 h-3.5 fill-current text-accent-400" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>`;
+                    } else {
+                        ratingStars += `<svg class="w-3.5 h-3.5 fill-current text-stone-200" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>`;
+                    }
+                }
+
+                html += `
+                    <div class="border-b border-stone-200 pb-6 last:border-0 last:pb-0">
+                        <div class="flex items-center justify-between mb-2">
+                            <h4 class="font-bold text-stone-800 text-xs uppercase tracking-wider">${rev.name}</h4>
+                            <span class="text-stone-400 text-[10px] uppercase tracking-wider font-semibold">${rev.date}</span>
+                        </div>
+                        <div class="flex items-center gap-1 mb-3">
+                            ${ratingStars}
+                        </div>
+                        <p class="text-stone-500 text-[11px] leading-relaxed uppercase tracking-[0.05em]">${rev.comment}</p>
+                    </div>
+                `;
+            });
+
+            container.innerHTML = html;
+        }
+
+        function setupReviewSubmit() {
+            const form = document.getElementById('review-form');
+            if (!form) return;
+
+            form.addEventListener('submit', (e) => {
+                e.preventDefault();
+                const nameInput = document.getElementById('rev-name').value.trim();
+                const commentInput = document.getElementById('rev-comment').value.trim();
+
+                const options = { year: 'numeric', month: 'long', day: 'numeric' };
+                const today = new Date().toLocaleDateString("en-US", options);
+
+                reviewsDatabase.unshift({
+                    id: Date.now(),
+                    name: nameInput,
+                    rating: selectedStarValue,
+                    date: today,
+                    comment: commentInput
+                });
+
+                form.reset();
+                selectedStarValue = 5;
+                const stars = document.querySelectorAll('.star-select-btn');
+                stars.forEach(s => s.classList.add('text-accent-400'));
+
+                renderReviews();
+                showToast("Thank you for your client review.");
+
+                if (currentProduct) {
+                    currentProduct.reviewsCount += 1;
+                    document.getElementById('reviews-count-val').textContent = `(${currentProduct.reviewsCount} reviews)`;
+                }
+            });
+        }
+
+        function renderRelatedProducts() {
+            const container = document.getElementById('related-products-grid');
+            if (!container) return;
+
+            const related = products.filter(p => p.id !== currentProduct.id).slice(0, 3);
+            let html = '';
+
+            related.forEach(product => {
+                const isLiked = wishlist.includes(product.id);
+                const heartClass = isLiked ? 'text-red-500 fill-current' : 'text-stone-700 hover:text-red-500';
+                
+                html += `
+                    <div class="group flex flex-col bg-white rounded-none border border-stone-200/60 overflow-hidden relative transition-all duration-500 hover:shadow-lg">
+                        <div class="aspect-[4/5] overflow-hidden relative bg-stone-50 border-b border-stone-100">
+                            <button onclick="toggleWishlist(${product.id})" class="wishlist-btn absolute top-4 right-4 z-10 bg-white p-2 rounded-full shadow hover:bg-stone-50 transition-all focus:outline-none" data-id="${product.id}">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4.5 w-4.5 ${heartClass} transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+                                </svg>
+                            </button>
+
+                            <a href="product.html?id=${product.id}" class="block h-full">
+                                <img src="${product.images[0]}" alt="${product.title}" class="w-full h-full object-cover transition-transform duration-[1000ms] group-hover:scale-105">
+                            </a>
+                        </div>
+                        
+                        <div class="p-5 flex flex-col flex-1 bg-white">
+                            <span class="text-[9px] uppercase font-bold tracking-[0.25em] text-accent-500 mb-1.5">${product.category}</span>
+                            <h3 class="font-heading text-sm font-semibold text-stone-850 leading-tight mb-2 hover:text-accent-500 transition-colors">
+                                <a href="product.html?id=${product.id}">${product.title}</a>
+                            </h3>
+                            <div class="flex items-baseline gap-2 mt-auto font-mono">
+                                <span class="text-xs font-semibold text-stone-850">Rs. ${product.price.toLocaleString()}</span>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            });
+
+            container.innerHTML = html;
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lanka Luxe | Secure Checkout</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Plus+Jakarta+Sans:wght@200;300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Tailwind CSS CDN v3 -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: {
+                            900: '#0F3A2E',
+                            950: '#0D0D0C',
+                        },
+                        accent: {
+                            400: '#C5A880',
+                            500: '#9E805A',
+                        },
+                        stone: {
+                            50: '#FAF7F2',
+                            100: '#F5EFE6',
+                            200: '#EAE1D4',
+                            850: '#0D0D0C',
+                        }
+                    },
+                    fontFamily: {
+                        heading: ['Playfair Display', 'serif'],
+                        body: ['Plus Jakarta Sans', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .glass-nav {
+            background: rgba(250, 247, 242, 0.85);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+        }
+        body {
+            background-color: #FAF7F2;
+            color: #0D0D0C;
+        }
+    </style>
+</head>
+<body class="font-body selection:bg-stone-200 selection:text-stone-850">
+
+    <!-- 1. Header Navigation -->
+    <header class="sticky top-0 z-40 w-full border-b border-stone-200/50 glass-nav">
+        <div class="max-w-7xl mx-auto px-6 lg:px-10">
+            <div class="flex items-center justify-between h-24">
+                <!-- Logo -->
+                <div class="flex-1 text-center md:text-left">
+                    <a href="index.html" class="inline-block">
+                        <span class="font-body text-lg font-bold tracking-[0.35em] text-primary-950 uppercase">LANKA LUXE</span>
+                    </a>
+                </div>
+                <!-- Status Badge -->
+                <div class="flex items-center gap-2 text-[10px] font-bold uppercase tracking-[0.2em] text-stone-550 bg-stone-100 border border-stone-200/60 px-3.5 py-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5 text-stone-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+                    </svg>
+                    Secure Checkout
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- 2. Page Header Banner -->
+    <div class="bg-stone-100/40 border-b border-stone-200/50 py-10">
+        <div class="max-w-7xl mx-auto px-6 lg:px-10">
+            <h1 class="font-heading text-2xl sm:text-3xl font-light text-stone-850 tracking-wide">Checkout</h1>
+        </div>
+    </div>
+
+    <!-- 3. Checkout core content wrapper -->
+    <main class="max-w-7xl mx-auto px-6 lg:px-10 py-12">
+        
+        <!-- Cart empty handler -->
+        <div id="checkout-empty-state" class="hidden flex flex-col items-center justify-center py-20 text-center">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-stone-300 mb-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
+            </svg>
+            <h2 class="font-heading text-xl font-light text-stone-850">Your Bag is Empty</h2>
+            <p class="text-xs text-stone-400 max-w-sm mt-3 uppercase tracking-wider leading-relaxed">Add some items from our collections page to proceed with checkout.</p>
+            <a href="shop.html" class="mt-8 inline-block bg-stone-900 text-white text-xs font-bold tracking-[0.2em] uppercase px-8 py-4 shadow hover:bg-stone-800 transition-colors rounded-none">Return to Shop</a>
+        </div>
+
+        <div id="checkout-layout" class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
+            
+            <!-- Left Column: Stepper & Step Views -->
+            <div class="lg:col-span-7 space-y-8">
+                
+                <!-- Step progress indicators -->
+                <div class="flex items-center justify-between border-b border-stone-200/50 pb-5 text-center">
+                    <div class="flex-1 flex flex-col sm:flex-row items-center justify-center gap-2.5 text-stone-850 font-bold" id="step-badge-1">
+                        <span class="h-5.5 w-5.5 rounded-full bg-stone-900 text-white text-[10px] flex items-center justify-center font-mono">1</span>
+                        <span class="text-[10px] font-bold uppercase tracking-[0.2em]">Bag Review</span>
+                    </div>
+                    <div class="w-8 sm:w-16 border-t border-stone-200"></div>
+                    
+                    <div class="flex-1 flex flex-col sm:flex-row items-center justify-center gap-2.5 text-stone-400 font-semibold" id="step-badge-2">
+                        <span class="h-5.5 w-5.5 rounded-full bg-stone-100 text-stone-450 text-[10px] flex items-center justify-center border border-stone-300/60 font-mono">2</span>
+                        <span class="text-[10px] uppercase tracking-[0.2em]">Shipping</span>
+                    </div>
+                    <div class="w-8 sm:w-16 border-t border-stone-200"></div>
+                    
+                    <div class="flex-1 flex flex-col sm:flex-row items-center justify-center gap-2.5 text-stone-400 font-semibold" id="step-badge-3">
+                        <span class="h-5.5 w-5.5 rounded-full bg-stone-100 text-stone-450 text-[10px] flex items-center justify-center border border-stone-300/60 font-mono">3</span>
+                        <span class="text-[10px] uppercase tracking-[0.2em]">Payment</span>
+                    </div>
+                </div>
+
+                <!-- Core Form Steps Container -->
+                <div class="bg-white border border-stone-200/65 rounded-none p-8 shadow-sm">
+                    
+                    <!-- STEP 1: REVIEW BAG ITEMS -->
+                    <div id="step-content-1" class="space-y-6">
+                        <h3 class="font-heading text-lg font-light text-stone-850">Bag Review</h3>
+                        <div id="checkout-cart-items" class="divide-y divide-stone-200/60">
+                            <!-- Populated dynamically -->
+                        </div>
+                        
+                        <div class="pt-6 flex justify-end">
+                            <button onclick="changeStep(2)" class="bg-stone-900 hover:bg-stone-850 text-white text-xs font-bold tracking-[0.2em] uppercase px-8 py-4.5 rounded-none shadow-md">
+                                Continue to Shipping
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- STEP 2: SHIPPING DETAILS -->
+                    <form id="step-content-2" class="hidden space-y-6" onsubmit="event.preventDefault(); changeStep(3)">
+                        <h3 class="font-heading text-lg font-light text-stone-850">Shipping Information</h3>
+                        
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-[10px] font-bold uppercase tracking-wider text-stone-400 mb-1.5" for="ship-name">Full Name</label>
+                                <input type="text" id="ship-name" required class="w-full px-4 py-3 border border-stone-300 focus:outline-none focus:border-stone-800 text-xs text-stone-800 bg-stone-50 rounded-none">
+                            </div>
+                            <div>
+                                <label class="block text-[10px] font-bold uppercase tracking-wider text-stone-400 mb-1.5" for="ship-email">Email Address</label>
+                                <input type="email" id="ship-email" required class="w-full px-4 py-3 border border-stone-300 focus:outline-none focus:border-stone-800 text-xs text-stone-800 bg-stone-50 rounded-none">
+                            </div>
+                        </div>
+
+                        <div>
+                            <label class="block text-[10px] font-bold uppercase tracking-wider text-stone-400 mb-1.5" for="ship-address">Street Address</label>
+                            <input type="text" id="ship-address" required class="w-full px-4 py-3 border border-stone-300 focus:outline-none focus:border-stone-800 text-xs text-stone-800 bg-stone-50 rounded-none">
+                        </div>
+
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-[10px] font-bold uppercase tracking-wider text-stone-400 mb-1.5" for="ship-city">City</label>
+                                <input type="text" id="ship-city" required class="w-full px-4 py-3 border border-stone-300 focus:outline-none focus:border-stone-800 text-xs text-stone-800 bg-stone-50 rounded-none">
+                            </div>
+                            <div>
+                                <label class="block text-[10px] font-bold uppercase tracking-wider text-stone-400 mb-1.5" for="ship-phone">Phone Number</label>
+                                <input type="tel" id="ship-phone" required class="w-full px-4 py-3 border border-stone-300 focus:outline-none focus:border-stone-800 text-xs text-stone-800 bg-stone-50 rounded-none font-mono">
+                            </div>
+                        </div>
+
+                        <!-- Delivery methods selection -->
+                        <div class="border-t border-stone-200/60 pt-6">
+                            <h4 class="text-[10px] font-bold uppercase tracking-[0.2em] text-stone-400 mb-4">Delivery Method</h4>
+                            <div class="space-y-3" id="shipping-method-container">
+                                <label class="flex items-center justify-between border border-stone-200 rounded-none p-4 cursor-pointer bg-stone-50 hover:bg-stone-100 transition-colors">
+                                    <span class="flex items-center gap-3">
+                                        <input type="radio" name="shipping-method" value="standard" checked class="h-4 w-4 border-stone-300 text-stone-900 focus:ring-stone-900 rounded-full">
+                                        <span class="flex flex-col">
+                                            <span class="text-xs font-bold uppercase tracking-wider text-stone-800">Standard Island Courier</span>
+                                            <span class="text-[10px] text-stone-500 uppercase tracking-wide">3-5 working days</span>
+                                        </span>
+                                    </span>
+                                    <span class="text-xs font-bold text-stone-800 font-mono">Free</span>
+                                </label>
+                                
+                                <label class="flex items-center justify-between border border-stone-200 rounded-none p-4 cursor-pointer bg-stone-50 hover:bg-stone-100 transition-colors">
+                                    <span class="flex items-center gap-3">
+                                        <input type="radio" name="shipping-method" value="express" class="h-4 w-4 border-stone-300 text-stone-900 focus:ring-stone-900 rounded-full">
+                                        <span class="flex flex-col">
+                                            <span class="text-xs font-bold uppercase tracking-wider text-stone-800">Express Delivery Courier</span>
+                                            <span class="text-[10px] text-stone-500 uppercase tracking-wide">1-2 working days</span>
+                                        </span>
+                                    </span>
+                                    <span class="text-xs font-bold text-stone-850 font-mono">Rs. 650</span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="pt-6 flex items-center justify-between border-t border-stone-200/60">
+                            <button type="button" onclick="changeStep(1)" class="text-[10px] font-bold text-stone-450 hover:text-stone-850 uppercase tracking-[0.2em]">Back</button>
+                            <button type="submit" class="bg-stone-900 hover:bg-stone-850 text-white text-xs font-bold tracking-[0.2em] uppercase px-8 py-4.5 rounded-none shadow-md">
+                                Continue to Payment
+                            </button>
+                        </div>
+                    </form>
+
+                    <!-- STEP 3: PAYMENT -->
+                    <form id="step-content-3" class="hidden space-y-6" onsubmit="event.preventDefault(); handleOrderSubmit()">
+                        <h3 class="font-heading text-lg font-light text-stone-850">Select Payment Method</h3>
+                        
+                        <div class="space-y-4" id="payment-methods-group">
+                            <label class="flex items-center gap-3 border border-stone-200 rounded-none p-4 cursor-pointer bg-stone-50 hover:bg-stone-100 transition-colors">
+                                <input type="radio" name="payment-option" value="card" checked class="h-4 w-4 text-stone-900 focus:ring-stone-900 rounded-full">
+                                <span class="text-xs font-bold uppercase tracking-wider text-stone-800">Credit / Debit Card (Visa, MasterCard)</span>
+                            </label>
+                            
+                            <div id="card-details-fields" class="border border-stone-200 rounded-none p-5 space-y-4 bg-stone-50">
+                                <div>
+                                    <label class="block text-[10px] font-bold uppercase tracking-wider text-stone-400 mb-1.5" for="card-num">Card Number</label>
+                                    <input type="text" id="card-num" placeholder="XXXX XXXX XXXX XXXX" required class="w-full px-4 py-2.5 border border-stone-300 focus:outline-none focus:border-stone-800 bg-white rounded-none text-xs text-stone-800 font-mono">
+                                </div>
+                                <div class="grid grid-cols-2 gap-4">
+                                    <div>
+                                        <label class="block text-[10px] font-bold uppercase tracking-wider text-stone-400 mb-1.5" for="card-expiry">Expiry Date</label>
+                                        <input type="text" id="card-expiry" placeholder="MM/YY" required class="w-full px-4 py-2.5 border border-stone-300 focus:outline-none focus:border-stone-800 bg-white rounded-none text-xs text-stone-850 font-mono">
+                                    </div>
+                                    <div>
+                                        <label class="block text-[10px] font-bold uppercase tracking-wider text-stone-400 mb-1.5" for="card-cvv">CVV</label>
+                                        <input type="password" id="card-cvv" placeholder="***" maxlength="3" required class="w-full px-4 py-2.5 border border-stone-300 focus:outline-none focus:border-stone-800 bg-white rounded-none text-xs text-stone-850 font-mono">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <label class="flex items-center gap-3 border border-stone-200 rounded-none p-4 cursor-pointer bg-stone-50 hover:bg-stone-100 transition-colors">
+                                <input type="radio" name="payment-option" value="bank" class="h-4 w-4 text-stone-900 focus:ring-stone-900 rounded-full">
+                                <span class="text-xs font-bold uppercase tracking-wider text-stone-800">Bank Transfer / Deposition</span>
+                            </label>
+
+                            <label class="flex items-center gap-3 border border-stone-200 rounded-none p-4 cursor-pointer bg-stone-50 hover:bg-stone-100 transition-colors">
+                                <input type="radio" name="payment-option" value="cod" class="h-4 w-4 text-stone-900 focus:ring-stone-900 rounded-full">
+                                <span class="text-xs font-bold uppercase tracking-wider text-stone-800">Cash on Delivery (COD)</span>
+                            </label>
+                        </div>
+
+                        <div class="pt-6 flex items-center justify-between border-t border-stone-200/60">
+                            <button type="button" onclick="changeStep(2)" class="text-[10px] font-bold text-stone-450 hover:text-stone-850 uppercase tracking-[0.2em]">Back</button>
+                            <button type="submit" class="bg-stone-900 hover:bg-stone-850 text-white text-xs font-bold tracking-[0.2em] uppercase px-8 py-4.5 rounded-none shadow-md">
+                                Complete Order
+                            </button>
+                        </div>
+                    </form>
+
+                </div>
+            </div>
+
+            <!-- Right Column: Order Summary Sidebar -->
+            <div class="lg:col-span-5 lg:sticky lg:top-28">
+                <div class="border border-stone-200/65 rounded-none p-8 bg-white shadow-sm space-y-6">
+                    <h3 class="text-xs font-bold uppercase tracking-[0.25em] text-stone-850 border-b border-stone-200/60 pb-4">Order Summary</h3>
+                    
+                    <!-- Sidebar list -->
+                    <div id="summary-items" class="max-h-60 overflow-y-auto space-y-4 pr-1">
+                        <!-- Populated dynamically -->
+                    </div>
+
+                    <!-- Price Calculations -->
+                    <div class="border-t border-stone-200/60 pt-5 space-y-3.5 text-xs">
+                        <div class="flex justify-between text-stone-450 uppercase font-semibold tracking-wider">
+                            <span>Subtotal</span>
+                            <span id="summary-subtotal" class="font-mono text-stone-800 font-bold">Rs. 0</span>
+                        </div>
+                        <div class="flex justify-between text-stone-450 uppercase font-semibold tracking-wider">
+                            <span>Delivery</span>
+                            <span id="summary-shipping" class="font-mono text-stone-800 font-bold">Rs. 0</span>
+                        </div>
+                        <div class="flex justify-between text-stone-450 uppercase font-semibold tracking-wider">
+                            <span>VAT / Taxes (8%)</span>
+                            <span id="summary-tax" class="font-mono text-stone-800 font-bold">Rs. 0</span>
+                        </div>
+                        <div class="flex justify-between font-bold text-stone-850 text-sm pt-4 border-t border-stone-200/60 uppercase tracking-widest">
+                            <span>Total Cost</span>
+                            <span id="summary-total" class="font-mono text-accent-500 text-base">Rs. 0</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- SUCCESS MODAL POPUP -->
+    <div id="success-modal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4 bg-stone-950/70 backdrop-blur-sm">
+        <div class="bg-white rounded-none border border-accent-400 p-8 sm:p-10 max-w-md w-full text-center shadow-2xl relative overflow-hidden animate-slide-up">
+            
+            <div class="mx-auto flex items-center justify-center h-16 w-16 rounded-full bg-stone-100 text-stone-900 border border-stone-200 mb-6">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-accent-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                </svg>
+            </div>
+            
+            <h2 class="font-heading text-2xl font-light text-stone-850 mb-2">Purchase Successful</h2>
+            <p class="text-xs text-stone-400 uppercase tracking-wider mb-1">Thank you for shopping at Lanka Luxe</p>
+            <p class="text-[10px] text-stone-400 uppercase tracking-wider mb-6">Order Reference: <strong id="success-order-id" class="text-stone-850 font-mono font-bold"></strong></p>
+            
+            <div class="bg-stone-50 border border-stone-200 p-5 rounded-none text-left text-[10px] uppercase tracking-wider leading-relaxed mb-6 space-y-2 text-stone-500">
+                <p>• Receipt dispatch: <strong id="success-email" class="text-stone-850"></strong>.</p>
+                <p>• Delivery address: <strong id="success-address" class="text-stone-850"></strong>.</p>
+                <p>• Payment mode: <strong id="success-payment" class="text-stone-850"></strong>.</p>
+            </div>
+
+            <button onclick="handleSuccessModalClose()" class="w-full bg-stone-900 hover:bg-stone-850 text-white font-semibold text-xs uppercase tracking-[0.25em] py-4 rounded-none transition-colors">
+                Continue Shopping
+            </button>
+        </div>
+    </div>
+
+    <!-- 4. Footer -->
+    <footer class="bg-stone-950 text-stone-500 border-t border-stone-900 pt-12 pb-10 mt-20">
+        <div class="max-w-7xl mx-auto px-6 lg:px-10 text-center text-[10px] font-semibold uppercase tracking-widest text-stone-600">
+            <p>&copy; 2026 Lanka Luxe. Weaved with pride in Sri Lanka.</p>
+        </div>
+    </footer>
+
+    <!-- Shared Core Engine JS -->
+    <script src="script.js"></script>
+    <script>
+        let currentStep = 1;
+        let deliveryCost = 0;
+
+        document.addEventListener('DOMContentLoaded', () => {
+            checkCartEmptyState();
+            renderCheckoutViews();
+            setupShippingMethodListeners();
+            setupPaymentOptionToggle();
+            
+            window.addEventListener('cartUpdated', () => {
+                checkCartEmptyState();
+                renderCheckoutViews();
+            });
+        });
+
+        function checkCartEmptyState() {
+            const layout = document.getElementById('checkout-layout');
+            const emptyState = document.getElementById('checkout-empty-state');
+
+            if (cart.length === 0) {
+                if (layout) layout.classList.add('hidden');
+                if (emptyState) emptyState.classList.remove('hidden');
+            } else {
+                if (layout) layout.classList.remove('hidden');
+                if (emptyState) emptyState.classList.add('hidden');
+            }
+        }
+
+        function changeStep(stepNum) {
+            document.getElementById('step-content-1').classList.add('hidden');
+            document.getElementById('step-content-2').classList.add('hidden');
+            document.getElementById('step-content-3').classList.add('hidden');
+
+            document.getElementById(`step-content-${stepNum}`).classList.remove('hidden');
+
+            updateStepBadges(stepNum);
+            currentStep = stepNum;
+        }
+
+        function updateStepBadges(activeStep) {
+            for (let i = 1; i <= 3; i++) {
+                const badge = document.getElementById(`step-badge-${i}`);
+                if (!badge) continue;
+
+                const circle = badge.querySelector('span');
+                const label = badge.querySelector('span:nth-child(2)');
+
+                if (i === activeStep) {
+                    badge.className = "flex-1 flex flex-col sm:flex-row items-center justify-center gap-2.5 text-stone-850 font-bold";
+                    circle.className = "h-5.5 w-5.5 rounded-full bg-stone-900 text-white text-[10px] flex items-center justify-center font-mono";
+                    if (label) label.className = "text-[10px] font-bold uppercase tracking-[0.2em] text-stone-855";
+                } else if (i < activeStep) {
+                    badge.className = "flex-1 flex flex-col sm:flex-row items-center justify-center gap-2.5 text-stone-850 font-medium";
+                    circle.className = "h-5.5 w-5.5 rounded-full bg-stone-200 text-stone-850 text-[10px] flex items-center justify-center font-mono";
+                    if (label) label.className = "text-[10px] font-bold uppercase tracking-[0.2em] text-stone-400";
+                } else {
+                    badge.className = "flex-1 flex flex-col sm:flex-row items-center justify-center gap-2.5 text-stone-400 font-medium";
+                    circle.className = "h-5.5 w-5.5 rounded-full bg-stone-100 text-stone-450 text-[10px] flex items-center justify-center border border-stone-300/60 font-mono";
+                    if (label) label.className = "text-[10px] uppercase tracking-[0.2em] text-stone-400";
+                }
+            }
+        }
+
+        function setupShippingMethodListeners() {
+            const inputs = document.querySelectorAll('input[name="shipping-method"]');
+            inputs.forEach(input => {
+                input.addEventListener('change', (e) => {
+                    const method = e.target.value;
+                    if (method === 'express') {
+                        deliveryCost = 650;
+                    } else {
+                        deliveryCost = 0;
+                    }
+                    updateTotals();
+                });
+            });
+        }
+
+        function setupPaymentOptionToggle() {
+            const inputs = document.querySelectorAll('input[name="payment-option"]');
+            const cardFields = document.getElementById('card-details-fields');
+            
+            inputs.forEach(input => {
+                input.addEventListener('change', (e) => {
+                    const opt = e.target.value;
+                    if (opt === 'card') {
+                        cardFields.classList.remove('hidden');
+                        document.getElementById('card-num').required = true;
+                        document.getElementById('card-expiry').required = true;
+                        document.getElementById('card-cvv').required = true;
+                    } else {
+                        cardFields.classList.add('hidden');
+                        document.getElementById('card-num').required = false;
+                        document.getElementById('card-expiry').required = false;
+                        document.getElementById('card-cvv').required = false;
+                    }
+                });
+            });
+        }
+
+        function renderCheckoutViews() {
+            const cartContainer = document.getElementById('checkout-cart-items');
+            if (cartContainer) {
+                let html = '';
+                cart.forEach((item, idx) => {
+                    html += `
+                        <div class="flex items-start gap-4 py-5 first:pt-0 last:pb-0">
+                            <img src="${item.image}" alt="${item.title}" class="w-14 h-18 object-cover bg-stone-50 border border-stone-200/50">
+                            <div class="flex-1">
+                                <h4 class="font-heading text-xs font-semibold text-stone-850 leading-tight">${item.title}</h4>
+                                <p class="text-[9px] text-stone-400 mt-1 uppercase tracking-wider">Size: ${item.size} / Color: ${item.color}</p>
+                                <div class="flex items-center justify-between mt-3.5">
+                                    <div class="flex items-center border border-stone-300 rounded-none bg-white">
+                                        <button onclick="updateCartQty(${idx}, -1)" class="px-2 py-0.5 text-stone-600 hover:bg-stone-100 transition-colors text-[10px] font-bold">-</button>
+                                        <span class="px-3 text-[10px] font-bold text-stone-850 font-mono">${item.quantity}</span>
+                                        <button onclick="updateCartQty(${idx}, 1)" class="px-2 py-0.5 text-stone-600 hover:bg-stone-100 transition-colors text-[10px] font-bold">+</button>
+                                    </div>
+                                    <span class="text-[10px] font-bold text-stone-400 hover:text-red-500 uppercase tracking-widest cursor-pointer transition-colors" onclick="removeFromCart(${idx})">Remove</span>
+                                </div>
+                            </div>
+                            <span class="font-semibold text-stone-850 text-xs font-mono mt-1">Rs. ${(item.price * item.quantity).toLocaleString()}</span>
+                        </div>
+                    `;
+                });
+                cartContainer.innerHTML = html;
+            }
+
+            const summaryContainer = document.getElementById('summary-items');
+            if (summaryContainer) {
+                let html = '';
+                cart.forEach(item => {
+                    html += `
+                        <div class="flex items-center gap-3">
+                            <img src="${item.image}" alt="${item.title}" class="w-8 h-10 object-cover bg-stone-50 border border-stone-200/50">
+                            <div class="flex-1 min-w-0">
+                                <h4 class="text-[10px] font-bold text-stone-800 truncate leading-tight uppercase tracking-wider">${item.title}</h4>
+                                <p class="text-[9px] text-stone-450 mt-1 uppercase tracking-wider">Qty: ${item.quantity} / ${item.size}</p>
+                            </div>
+                            <span class="text-[11px] font-semibold text-stone-850 font-mono">Rs. ${(item.price * item.quantity).toLocaleString()}</span>
+                        </div>
+                    `;
+                });
+                summaryContainer.innerHTML = html;
+            }
+
+            updateTotals();
+        }
+
+        function updateTotals() {
+            let subtotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+            let tax = Math.round(subtotal * 0.08);
+            let total = subtotal + tax + deliveryCost;
+
+            const subDisplay = document.getElementById('summary-subtotal');
+            const shipDisplay = document.getElementById('summary-shipping');
+            const taxDisplay = document.getElementById('summary-tax');
+            const totalDisplay = document.getElementById('summary-total');
+
+            if (subDisplay) subDisplay.textContent = `Rs. ${subtotal.toLocaleString()}`;
+            if (shipDisplay) shipDisplay.textContent = deliveryCost === 0 ? "Free" : `Rs. ${deliveryCost.toLocaleString()}`;
+            if (taxDisplay) taxDisplay.textContent = `Rs. ${tax.toLocaleString()}`;
+            if (totalDisplay) totalDisplay.textContent = `Rs. ${total.toLocaleString()}`;
+        }
+
+        function handleOrderSubmit() {
+            const name = document.getElementById('ship-name').value;
+            const email = document.getElementById('ship-email').value;
+            const address = document.getElementById('ship-address').value;
+            const city = document.getElementById('ship-city').value;
+            
+            const paymentOptions = document.getElementsByName('payment-option');
+            let paymentVal = '';
+            for (let opt of paymentOptions) {
+                if (opt.checked) {
+                    if (opt.value === 'card') paymentVal = 'Visa / Mastercard';
+                    else if (opt.value === 'bank') paymentVal = 'Bank Transfer';
+                    else paymentVal = 'Cash on Delivery (COD)';
+                    break;
+                }
+            }
+
+            document.getElementById('success-order-id').textContent = `#LL-2026-${Math.floor(1000 + Math.random() * 9000)}`;
+            document.getElementById('success-email').textContent = email;
+            document.getElementById('success-address').textContent = `${address}, ${city}`;
+            document.getElementById('success-payment').textContent = paymentVal;
+
+            document.getElementById('success-modal').classList.remove('hidden');
+        }
+
+        function handleSuccessModalClose() {
+            cart = [];
+            saveCart();
+            updateCartBadges();
+
+            document.getElementById('success-modal').classList.add('hidden');
+            window.location.href = 'index.html';
+        }
+    </script>
+</body>
+</html>
